@@ -1,6 +1,8 @@
 # AngularEcommerce
 
+This is a real world application built with Angular, Firebase, Bootstrap4
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.3.
+
 
 ## Development server
 
