@@ -1,10 +1,16 @@
+
+.container {
+    margin-top:-30px;
+}
 h1{
-    margin-left:420px;
+    text-align: center;
+    padding-top: -130px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    line-height:4px;
 }
 img {
    
-    width: 1275px;
+    width: 1250px;
     height: 275px;
     vertical-align: top;
     margin-top:23px;
@@ -12,6 +18,16 @@ img {
     margin-right:none;
 }
 .button{
-    margin-top: 60px;
-    margin-left:460px;
+    text-align: center;
+    margin-top: 30px;
+    
+}
+.btn {
+    position: absolute;
+    
+}
+@media screen and (max-width:1274px) {
+     img {
+         width: 100%;
+     }
 }
