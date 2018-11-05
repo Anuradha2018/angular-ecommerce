@@ -1,3 +1,4 @@
+import { AdminAuthGuardService } from './admin-auth-guard.service';
 import { UserService } from './user.service';
 import { AuthGuardService } from './auth-guard.service';
 import { AuthService } from './auth.service';
@@ -59,7 +60,8 @@ import { LoginComponent } from './login/login.component';
   providers: [
     AuthService,
     AuthGuardService,
-    UserService
+    UserService,
+    AdminAuthGuardService
   ],
   bootstrap: [AppComponent]
 })
