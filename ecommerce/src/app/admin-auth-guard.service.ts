@@ -2,9 +2,9 @@ import { UserService } from './user.service';
 import { AuthService } from './auth.service';
 import { CanActivate } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { map, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
