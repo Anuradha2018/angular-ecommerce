@@ -14,12 +14,12 @@ export class CategoryService {
   constructor(private db: AngularFireDatabase) { }
 
   getCategories() {
-    return this.db.list('/categories')   .snapshotChanges()
+    return this.db.list('/categories').snapshotChanges()
     .pipe(
       map(categories => {
-        return categories.map(cat => ({
-          key: cat.key,
-          name: (<any>cat.payload.val()).name
+        return categories.map(c => ({
+          key: c.key,
+          name: (<any>c.payload.val()).name
         }));
       })
     );
