@@ -39,10 +39,10 @@
   </div>
   <div class="col-md-6">
       <div class="card" style="width: 20rem;">
-          <img class="card-img-top" [src]="imageUrl.value">
+          <img class="card-img-top" [src]="product.imageUrl">
           <div class="card-body">
-            <h5 class="card-title">{{title.value}}</h5>
-            <p class="card-text">{{price.value | currency:'DKK': true}}</p>
+            <h5 class="card-title">{{product.title}}</h5>
+            <p class="card-text">{{product.price | currency:'DKK': true}}</p>
           </div>
         </div>
     </div>

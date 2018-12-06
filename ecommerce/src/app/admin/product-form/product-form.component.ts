@@ -11,7 +11,7 @@ import { take } from 'rxjs/operators';
 })
 export class ProductFormComponent implements OnInit {
   categories$;
-  product;
+  product = {};
   productId;
 
  constructor(
@@ -21,13 +21,8 @@ export class ProductFormComponent implements OnInit {
    private productService: ProductService) {
     this.categories$ = categoryService.getCategories();
 
-    const productId = this.route.snapshot.paramMap.get('id');
-    if (this.productId) {
-      this.productService.get(this.productId).valueChanges().pipe(
-        take(1)
-      ).subscribe(p => this.product = p);
-    }
-  }
+    const productId = this.route.snapshot.paramMap.get('productId');
+   }
 
   save(product) {
     this.productService.create(product);

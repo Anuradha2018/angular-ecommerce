@@ -1,6 +1,7 @@
 import { Product } from './../../models/product';
 import { ProductService } from './../../product.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin-products',
