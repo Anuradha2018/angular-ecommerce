@@ -9,13 +9,12 @@ import { Observable } from 'rxjs';
   styleUrls: ['./admin-products.component.css']
 })
 export class AdminProductsComponent implements OnInit {
-  productKr;
+  products$;
   constructor(private productService: ProductService) {
+    this.products$ = this.productService.getAll();
    }
 
   ngOnInit() {
-    this.productKr = this.productService.getAll();
-    console.log(this.productKr);
   }
 
 }
