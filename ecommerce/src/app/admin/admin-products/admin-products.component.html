@@ -11,7 +11,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let product of products$ | async">
-            <td>{{product.title}}</td>
+            <td>{{product.title | json}}</td>
             <td>{{product.price}}</td>
             <td><a [routerLink]="['/admin/products/', product.$key]">Edit</a></td>
         </tr>
