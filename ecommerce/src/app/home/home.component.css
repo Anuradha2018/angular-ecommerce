@@ -1,0 +1,33 @@
+
+.container {
+    margin-top:-30px;
+}
+h1{
+    text-align: center;
+    padding-top: -130px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    line-height:4px;
+}
+img {
+   
+    width: 1250px;
+    height: 275px;
+    vertical-align: top;
+    margin-top:23px;
+    margin-left:-83px;
+    margin-right:none;
+}
+.button{
+    text-align: center;
+    margin-top: 30px;
+    
+}
+.btn {
+    position: relative;
+    
+}
+@media screen and (max-width:1274px) {
+     img {
+         width: 100%;
+     }
+}

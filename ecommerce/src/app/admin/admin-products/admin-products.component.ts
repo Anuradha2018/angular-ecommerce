@@ -1,8 +1,8 @@
 import { Product } from './../../models/product';
 import { ProductService } from './../../product.service';
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+
 
 
 @Component({
@@ -10,13 +10,28 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.css']
 })
-export class AdminProductsComponent implements OnInit {
-  products$;
-  constructor(private productService: ProductService) {
-    this.products$ = this.productService.getAll();
-    console.log(this.products$);
+export class AdminProductsComponent implements OnInit, OnDestroy {
+  products: Product[];
+  filteredProducts: Product[];
+  subscription: Subscription;
+
+  constructor(
+    private productService: ProductService) {
+    this.subscription = this.productService.getAll()
+    .subscribe((products: Product[]) => {
+
+      this.filteredProducts = this.products = products;
+    });
+  }
+
+   filter(query: string) {
+    this.filteredProducts = query ?
+    this.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) : this.products;
    }
 
+   ngOnDestroy() {
+    this.subscription.unsubscribe();
+   }
   ngOnInit() {
   }
 
