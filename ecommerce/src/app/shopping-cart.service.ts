@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
-import { Product } from './../../models/product';
+import { Product } from './models/product';
 import { map, take } from 'rxjs/operators';
-import { ShoppingCart } from '../models/shopping-cart';
+import { ShoppingCart } from './models/shopping-cart';
 import { Observable } from 'rxjs';
-import { ShoppingCartItem } from '../models/shopping-cart-item';
+import { ShoppingCartItem } from './models/shopping-cart-item';
 
 @Injectable({
   providedIn: 'root'
@@ -67,15 +67,18 @@ export class ShoppingCartService {
       .valueChanges()
       .pipe(take(1))
       .subscribe((item: any) => {
-        let quantity = ((item && item.quantity) || 0) + change;
+        const quantity = ((item && item.quantity) || 0) + change;
 
-        if (quantity === 0) item$.remove();
-        else item$.update({
+        if (quantity === 0) {
+          item$.remove();
+        } else {
+          item$.update({
           title: product.title,
           imageUrl: product.imageUrl,
           price: product.price,
           quantity: quantity
         });
+      }
       });
   }
 }
