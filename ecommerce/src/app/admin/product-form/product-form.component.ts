@@ -23,9 +23,7 @@ export class ProductFormComponent implements OnInit {
 
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
-      this.productService.get(this.id).valueChanges().pipe(
-        take(1)
-      ).subscribe(p => this.product = p);
+      this.productService.get(this.id).valueChanges().pipe(take(1)).subscribe(p => this.product = p);
     }
   }
 
@@ -35,6 +33,7 @@ export class ProductFormComponent implements OnInit {
     } else {
       this.productService.create(product);
     }
+
     this.router.navigate(['/admin/products']);
   }
   delete() {
