@@ -1,7 +1,8 @@
 import { Product } from './../../models/product';
 import { ProductService } from './../../product.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { DataTableResource } from 'angular-4-data-table';
 
 
 
@@ -12,26 +13,46 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
   products: Product[];
-  filteredProducts: Product[];
   subscription: Subscription;
+  tableResource: DataTableResource<Product>;
+  items: Product[] = [];
+  itemCount: number;
 
-  constructor(
-    private productService: ProductService) {
+  constructor(private productService: ProductService) {
     this.subscription = this.productService.getAll()
-    .subscribe((products: Product[]) => {
-
-      this.filteredProducts = this.products = products;
-    });
+      .subscribe(products => {
+        this.products = products;
+        this.initializeTable(products);
+      });
   }
 
-   filter(query: string) {
-    this.filteredProducts = query ?
-    this.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) : this.products;
-   }
+  private initializeTable(products: Product[]) {
+    this.tableResource = new DataTableResource(products);
+    this.tableResource.query({ offset: 0 })
+      .then(items => this.items = items);
+    this.tableResource.count()
+      .then(count => this.itemCount = count);
+  }
 
-   ngOnDestroy() {
+  reloadItems(params) {
+    if (this.tableResource) {
+      this.tableResource.query(params)
+      .then(items => this.items = items);
+    }
+  }
+
+  filter(query: string) {
+    const filteredProducts = (query) ?
+      this.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) :
+      this.products;
+
+    this.initializeTable(filteredProducts);
+  }
+
+  ngOnDestroy() {
     this.subscription.unsubscribe();
-   }
+  }
+
   ngOnInit() {
   }
 
