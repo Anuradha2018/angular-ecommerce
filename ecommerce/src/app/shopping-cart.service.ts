@@ -64,7 +64,7 @@ export class ShoppingCartService {
 
   private async updateItem(product: Product, change: number) {
     let cartId = await this.getOrCreateCartId() as string;
-    let item$ = this.getItem(cartId, product.$key);
+    let item$ = this.getItem(cartId, product.key);
 
     item$
       .valueChanges()
