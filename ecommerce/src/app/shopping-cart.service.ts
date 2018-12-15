@@ -11,7 +11,10 @@ import { ShoppingCartItem } from './models/shopping-cart-item';
 })
 export class ShoppingCartService {
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(
+    private db: AngularFireDatabase
+  ) { }
+
   async removeFromCart(product: Product) {
     this.updateItem(product, -1);
   }
@@ -51,34 +54,31 @@ export class ShoppingCartService {
   private async getOrCreateCartId(): Promise<string> {
     const cartId = localStorage.getItem('cartId');
 
-    if (cartId) {
+    if (cartId)
       return cartId;
-    }
+
     const result = await this.create();
     localStorage.setItem('cartId', result.key);
     return result.key;
   }
 
   private async updateItem(product: Product, change: number) {
-    const cartId = await this.getOrCreateCartId() as string;
-    const item$ = this.getItem(cartId, product.key);
+    let cartId = await this.getOrCreateCartId() as string;
+    let item$ = this.getItem(cartId, product.$key);
 
     item$
       .valueChanges()
       .pipe(take(1))
       .subscribe((item: any) => {
-        const quantity = ((item && item.quantity) || 0) + change;
+        let quantity = ((item && item.quantity) || 0) + change;
 
-        if (quantity === 0) {
-          item$.remove();
-        } else {
-          item$.update({
+        if (quantity === 0) item$.remove();
+        else item$.update({
           title: product.title,
           imageUrl: product.imageUrl,
           price: product.price,
           quantity: quantity
         });
-      }
       });
   }
 }
