@@ -1,3 +1,24 @@
-<p>
-  admin-orders works!
-</p>
+<h1>Orders</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Customer</th>
+      <th>Date</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders$ | async">
+      <td>{{ order.shipping.name }}</td>
+      <td>{{ order.dateCreated | date }}</td>
+    <!--  <td>
+        <button type="button" class="btn btn-default">
+          <a [routerLink]="['/admin/admin-orders', order.$key]">{{ order.status }}</a>
+        </button>
+      </td>-->
+      <td>
+        <a [routerLink]="['/admin/admin-orders', order.$key]">View</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
