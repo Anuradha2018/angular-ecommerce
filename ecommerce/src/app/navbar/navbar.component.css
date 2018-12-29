@@ -1,3 +1,6 @@
 .dropdown-toggle {
     cursor: pointer;
 }
+.nav-item .dropdown {
+    float: right;
+}
